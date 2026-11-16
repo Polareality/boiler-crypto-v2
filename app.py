@@ -341,9 +341,14 @@ elif nav == 'Case lab':
             if animate:
                 st.markdown(case_reel(result, st.session_state.purchase_id), unsafe_allow_html=True)
             if case_sound and animate:
-                with st.container(key='case_audio_playback'):
-                    st.audio(Path(__file__).with_name('assets') / 'case-reel.wav',
-                             format='audio/wav', autoplay=True)
+                audio_path = Path(__file__).with_name('assets') / 'case-reel.wav'
+                try:
+                    audio_data = audio_path.read_bytes()
+                except FileNotFoundError:
+                    audio_data = None
+                if audio_data:
+                    with st.container(key='case_audio_playback'):
+                        st.audio(audio_data, format='audio/wav', autoplay=True)
             subtitle = 'Duplicate' if result['duplicate'] else 'New collectible unlocked'
             if result['refund']:
                 subtitle += f' · {result["refund"]} coins returned'
