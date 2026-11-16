@@ -13,7 +13,7 @@ st.markdown('''<style>
 :root{--gold:#CFB991;--gold2:#E9D9B5;--bg:#0C0D0E;--surface:#191B1D;--line:#383735;--white:#F5F3ED;--muted:#B9B6AC}
 html,body,.stApp,[data-testid="stAppViewContainer"]{background:var(--bg)!important;color:var(--white)!important}
 [data-testid="stHeader"]{background:transparent!important}
-[data-testid="stMainBlockContainer"]{max-width:1250px!important;padding-top:1.55rem!important;padding-bottom:3rem!important}
+[data-testid="stMainBlockContainer"]{max-width:1250px!important;padding-top:4rem!important;padding-bottom:3rem!important}
 .block-container{max-width:1250px!important}
 html{font-size:18px!important}
 h1,h2,h3,p,span,label,div,button{font-family:Inter,"Segoe UI",Arial,sans-serif}
@@ -130,7 +130,7 @@ hr{border-color:#343434!important}
 [class*="st-key-clear_"] button{min-width:0}
 [class*="st-key-clear_"] button p{white-space:nowrap;overflow:visible;text-overflow:clip}
 @media(prefers-reduced-motion:reduce){.case-reel{display:none}}
-@media(max-width:740px){[data-testid="stMainBlockContainer"]{padding:1rem .9rem!important}.hero{padding:20px}html{font-size:16px!important}.avatar-scene{min-height:255px}}
+@media(max-width:740px){[data-testid="stMainBlockContainer"]{padding:4.25rem .9rem 1rem!important}.hero{padding:20px}html{font-size:16px!important}.avatar-scene{min-height:255px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>''', unsafe_allow_html=True)
 
