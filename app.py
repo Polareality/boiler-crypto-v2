@@ -427,7 +427,7 @@ else:
                     active=player['equipped'].get(slot)==item
                     if st.button('Equipped' if active else 'Equip',key=f'equip_{item}',disabled=active,use_container_width=True):
                         if equip(item):st.rerun()
-    st.caption('Your progress is stored locally in profile.sqlite3 in this project folder.')
+    st.caption('Progress resets when you reload the page.')
 
 st.divider()
 st.caption('Independent educational project')

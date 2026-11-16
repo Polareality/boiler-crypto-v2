@@ -5,6 +5,7 @@ import secrets
 import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 DB = Path(os.environ.get('BOILER_PROFILE_DB', str(Path(__file__).with_name('profile.sqlite3'))))
 CASES = {
@@ -53,9 +54,22 @@ for item_id, name, rarity, slot, symbol, description in (
 ROLL_POOL = [k for k in ITEMS if k != "basic"]
 SLOTS = ("head", "face", "body", "effect", "pet")
 
+def profile_database():
+    if os.environ.get('BOILER_PROFILE_DB'):
+        return DB
+    import streamlit as st
+    from streamlit.runtime.scriptrunner import get_script_run_ctx
+
+    if get_script_run_ctx(suppress_warning=True) is None:
+        return DB
+    if 'profile_directory' not in st.session_state:
+        st.session_state.profile_directory = TemporaryDirectory(prefix='boiler-crypto-')
+    return Path(st.session_state.profile_directory.name) / 'profile.sqlite3'
+
+
 @contextmanager
 def connect():
-    db = sqlite3.connect(DB, timeout=15)
+    db = sqlite3.connect(profile_database(), timeout=15)
     db.execute("PRAGMA busy_timeout=15000")
     db.execute("CREATE TABLE IF NOT EXISTS profile (id INTEGER PRIMARY KEY, coins INTEGER NOT NULL, correct INTEGER NOT NULL, equipped TEXT NOT NULL)")
     db.execute("INSERT OR IGNORE INTO profile VALUES (1,0,0,'starter')")
